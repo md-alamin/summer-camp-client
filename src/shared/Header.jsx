@@ -15,10 +15,30 @@ const Header = () => {
 				</NavLink>
 			</li>
 			<li>
+				<NavLink
+					to="/instructors"
+					className={({ isActive }) => (isActive ? 'active' : 'default')}
+				>
+					Instructors
+				</NavLink>
+			</li>
+			<li>
+				<NavLink
+					to="/classes"
+					className={({ isActive }) => (isActive ? 'active' : 'default')}
+				>
+					Classes
+				</NavLink>
+			</li>
+			<li>
 				<NavLink to="/login">Login</NavLink>
 			</li>
 		</>
 	);
+
+	const lightMode = () => {
+		console.log('clicked');
+	};
 	return (
 		<div className="navbar bg-base-100">
 			<div className="navbar-start">
@@ -44,7 +64,7 @@ const Header = () => {
 					<input type="checkbox" />
 
 					{/* sun icon */}
-					<FaSun className="swap-on"></FaSun>
+					<FaSun className="swap-on" onClick={lightMode}></FaSun>
 
 					{/* moon icon */}
 					<FaMoon className="swap-off"></FaMoon>
