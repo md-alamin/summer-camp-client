@@ -1,21 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FaGoogle } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import loginImg from '../../assets/login-page.json';
+import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
+import Loader from '../../shared/Loader';
 
 const Register = () => {
+	const [loading, setLoading] = useState(false);
+	const { createUser, handleGoogleSignIn, updateInfo, logOut } =
+		useContext(AuthContext);
+	const navigate = useNavigate();
+
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
 	} = useForm();
-
-	const handleRegister = (data) => {
-		console.log(data);
-	};
 
 	const defaultOptions = {
 		loop: true,
@@ -25,6 +29,52 @@ const Register = () => {
 			preserveAspectRatio: 'xMidYMid slice',
 		},
 	};
+
+	const handleRegister = (data) => {
+		setLoading(true);
+		createUser(data?.email, data?.password)
+			.then((result) => {
+				const createdUser = result.user;
+				console.log(createdUser);
+				updateInfo(createdUser, data?.name, data?.photo)
+					.then(() => {})
+					.catch((error) => console.log(error));
+				logOut()
+					.then()
+					.catch((error) => console.log(error));
+				navigate('/login');
+				setLoading(false);
+				Swal.fire({
+					icon: 'success',
+					title: 'Successfully Registered',
+					showConfirmButton: false,
+					timer: 2000,
+				});
+			})
+			.catch((error) => {
+				setLoading(false);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: error,
+					footer: 'Please use different email address',
+				});
+			});
+	};
+
+	const googleLogin = () => {
+		handleGoogleSignIn()
+			.then((result) => {
+				const user = result.user;
+				navigate(from, { replace: true });
+				setLoading(false);
+			})
+			.catch((error) => console.log(error));
+	};
+
+	if (loading) {
+		return <Loader></Loader>;
+	}
 
 	return (
 		<div>
@@ -123,7 +173,10 @@ const Register = () => {
 							<label className="label mt-2">
 								<p className="text-center">
 									Or Register using Google
-									<FaGoogle className="mx-auto mt-2 text-blue-600  cursor-pointer"></FaGoogle>
+									<FaGoogle
+										onClick={googleLogin}
+										className="mx-auto mt-2 text-blue-600  cursor-pointer"
+									></FaGoogle>
 								</p>
 							</label>
 							<div className="form-control mt-6">

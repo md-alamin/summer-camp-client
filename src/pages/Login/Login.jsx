@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaGoogle } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import loginImg from '../../assets/login-page.json';
+import Swal from 'sweetalert2';
+import Loader from '../../shared/Loader';
+import { AuthContext } from '../../providers/AuthProviders';
 
 const Login = () => {
 	const [passType, setPassType] = useState('password');
+	const [loading, setLoading] = useState(false);
+	const { signIn, handleGoogleSignIn } = useContext(AuthContext);
+	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location.state?.from?.pathname || '/';
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const handleLogin = (data) => {
-		console.log(data);
-	};
 
 	const setType = () => {
 		if (passType === 'password') {
@@ -32,6 +38,40 @@ const Login = () => {
 			preserveAspectRatio: 'xMidYMid slice',
 		},
 	};
+
+	const handleLogin = (data) => {
+		setLoading(true);
+		signIn(data?.email, data?.password)
+			.then((result) => {
+				const loggedUser = result.user;
+				navigate(from, { replace: true });
+				setLoading(false);
+			})
+			.catch((error) => {
+				console.log(error);
+				setLoading(false);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: error,
+					footer: 'Please enter correct username/password',
+				});
+			});
+	};
+
+	const googleLogin = () => {
+		handleGoogleSignIn()
+			.then((result) => {
+				const user = result.user;
+				navigate(from, { replace: true });
+				setLoading(false);
+			})
+			.catch((error) => console.log(error));
+	};
+
+	if (loading) {
+		return <Loader></Loader>;
+	}
 
 	return (
 		<div>
@@ -96,7 +136,10 @@ const Login = () => {
 							<label className="label">
 								<p className="text-center">
 									Or Login using Google
-									<FaGoogle className="mx-auto mt-2 text-blue-600  cursor-pointer"></FaGoogle>
+									<FaGoogle
+										onClick={googleLogin}
+										className="mx-auto mt-2 text-blue-600  cursor-pointer"
+									></FaGoogle>
 								</p>
 							</label>
 							<div className="form-control mt-6">
