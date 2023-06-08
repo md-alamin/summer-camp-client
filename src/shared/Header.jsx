@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProviders';
+import Swal from 'sweetalert2';
+import defaultImg from '../assets/defaultImg.png';
+import logo from '../../public/logo.png';
+import logo2 from '../../public/logo-2.png';
 
-const Header = () => {
+const Header = ({ toggleTheme, isDarkMode }) => {
+	const { user, logOut } = useContext(AuthContext);
+
+	const handleLogOut = () => {
+		logOut().then(Swal.fire('Successfully logged out!'));
+	};
+
 	const navItems = (
 		<>
 			<li>
@@ -30,17 +41,28 @@ const Header = () => {
 					Classes
 				</NavLink>
 			</li>
-			<li>
-				<NavLink to="/login">Login</NavLink>
-			</li>
+			{user ? (
+				<>
+					<li>
+						<NavLink to="/dashboard">Dashboard</NavLink>
+					</li>
+					<li onClick={handleLogOut}>
+						<Link>Logout</Link>
+					</li>
+				</>
+			) : (
+				<li>
+					<NavLink to="/login">Login</NavLink>
+				</li>
+			)}
 		</>
 	);
-
-	const lightMode = () => {
-		console.log('clicked');
-	};
 	return (
-		<div className="navbar bg-base-100">
+		<div
+			className={`navbar ${
+				isDarkMode ? 'bg-black text-white' : 'bg-base-100'
+			} sticky top-0 z-10`}
+		>
 			<div className="navbar-start">
 				<div className="dropdown">
 					<label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -48,26 +70,49 @@ const Header = () => {
 					</label>
 					<ul
 						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+						className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-10"
 					>
 						{navItems}
 					</ul>
 				</div>
-				<a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+				<a>
+					{isDarkMode ? (
+						<img className="h-16" src={logo2} alt="" />
+					) : (
+						<img className="h-16" src={logo} alt="" />
+					)}
+				</a>
 			</div>
 			<div className="navbar-center hidden lg:flex">
 				<ul className="menu menu-horizontal px-1">{navItems}</ul>
 			</div>
-			<div className="navbar-end">
+			<div className="navbar-end flex mr-5">
+				{user ? (
+					user.photoURL ? (
+						<img
+							className="mr-5 h-10 w-10 rounded-full"
+							src={user.photoURL}
+							alt=""
+						/>
+					) : (
+						<img
+							className="mr-5 h-10 w-10 rounded-full"
+							src={defaultImg}
+							alt=""
+						/>
+					)
+				) : (
+					<></>
+				)}
 				<label className="swap swap-rotate">
 					{/* this hidden checkbox controls the state */}
 					<input type="checkbox" />
 
 					{/* sun icon */}
-					<FaSun className="swap-on" onClick={lightMode}></FaSun>
+					<FaSun size={20} className="swap-on" onClick={toggleTheme}></FaSun>
 
 					{/* moon icon */}
-					<FaMoon className="swap-off"></FaMoon>
+					<FaMoon size={20} className="swap-off" onClick={toggleTheme}></FaMoon>
 				</label>
 			</div>
 		</div>
