@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import Footer from '../shared/Footer';
 import Header from '../shared/Header';
 
@@ -19,7 +19,7 @@ const Main = () => {
 				toggleTheme={toggleTheme}
 				isDarkMode={isDarkMode && homePage ? isDarkMode : false}
 			></Header>
-			<Outlet isDarkMode={isDarkMode}></Outlet>
+			<Outlet></Outlet>
 			<Footer isDarkMode={isDarkMode && homePage ? isDarkMode : false}></Footer>
 		</div>
 	);

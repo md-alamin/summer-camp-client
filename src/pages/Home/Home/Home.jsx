@@ -2,6 +2,7 @@ import React from 'react';
 import HomeSwiper from '../HomeSwiper/HomeSwiper';
 import Banner from '../Banner/Banner';
 import PopularClass from '../PopularClass/PopularClass';
+import PopularInstructors from '../PopularInstructors/PopularInstructors';
 
 const Home = () => {
 	return (
@@ -9,6 +10,7 @@ const Home = () => {
 			<Banner></Banner>
 			<HomeSwiper></HomeSwiper>
 			<PopularClass></PopularClass>
+			<PopularInstructors></PopularInstructors>
 		</div>
 	);
 };

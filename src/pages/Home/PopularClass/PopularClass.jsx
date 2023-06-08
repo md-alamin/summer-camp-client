@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ClassCard from './ClassCard';
+import ClassCard from '../../../shared/ClassCard';
 
 const PopularClass = () => {
 	const [classes, setClasses] = useState([]);
