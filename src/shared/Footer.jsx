@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../public/logo.png';
+import logo2 from '../../public/logo-2.png';
 
 const Footer = ({ isDarkMode }) => {
 	return (
@@ -10,7 +11,11 @@ const Footer = ({ isDarkMode }) => {
 				}  text-base-content`}
 			>
 				<div className="text-center mx-auto">
-					<img className="mx-auto" src={logo} alt="" />
+					{isDarkMode ? (
+						<img className="mx-auto" src={logo2} alt="" />
+					) : (
+						<img className="mx-auto" src={logo} alt="" />
+					)}
 					<p
 						className={`text-center text-2xl font-semibold ${
 							isDarkMode ? 'text-white' : ''
