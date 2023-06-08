@@ -13,7 +13,6 @@ const Main = () => {
 		setIsDarkMode((prevMode) => !prevMode);
 	};
 
-	console.log(homePage, location.pathname);
 	return (
 		<div className={`px-10 ${isDarkMode && homePage ? 'bg-black' : ''}`}>
 			<Header
@@ -21,7 +20,7 @@ const Main = () => {
 				isDarkMode={isDarkMode && homePage ? isDarkMode : false}
 			></Header>
 			<Outlet isDarkMode={isDarkMode}></Outlet>
-			<Footer isDarkMode={isDarkMode}></Footer>
+			<Footer isDarkMode={isDarkMode && homePage ? isDarkMode : false}></Footer>
 		</div>
 	);
 };
