@@ -1,13 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../layout/Main';
+import Dashboard from '../layout/Dashboard';
 import Home from '../pages/Home/Home/Home';
 import Instructors from '../pages/Instructors/Instructors';
 import Classes from '../pages/Classes/Classes';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
-import Dashboard from '../pages/Dashboard/Dashboard';
-import PrivateRoute from './PrivateRoute';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import MySelectedClasses from '../pages/Dashboard/MySelectedClasses/MySelectedClasses';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
 	{
@@ -35,13 +36,19 @@ export const router = createBrowserRouter([
 				path: '/register',
 				element: <Register></Register>,
 			},
+		],
+	},
+	{
+		path: '/dashboard',
+		element: (
+			<PrivateRoute>
+				<Dashboard></Dashboard>
+			</PrivateRoute>
+		),
+		children: [
 			{
-				path: '/dashboard',
-				element: (
-					<PrivateRoute>
-						<Dashboard></Dashboard>
-					</PrivateRoute>
-				),
+				path: 'my-cart',
+				element: <MySelectedClasses></MySelectedClasses>,
 			},
 		],
 	},

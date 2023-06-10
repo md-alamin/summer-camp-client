@@ -9,7 +9,7 @@ const PopularClass = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios(
-					`${import.meta.env.VITE_SERVER_LINK}/sortClass`
+					`${import.meta.env.VITE_SERVER_LINK}/allClass/sort`
 				);
 				setClasses(response.data);
 			} catch (e) {

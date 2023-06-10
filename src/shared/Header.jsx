@@ -46,7 +46,7 @@ const Header = ({ toggleTheme, isDarkMode }) => {
 			{user ? (
 				<>
 					<li>
-						<NavLink to="/dashboard">
+						<NavLink to="/dashboard/my-cart">
 							Dashboard
 							<div className="indicator">
 								<FaCartPlus size={24}></FaCartPlus>
