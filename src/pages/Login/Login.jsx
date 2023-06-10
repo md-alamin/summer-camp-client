@@ -63,6 +63,19 @@ const Login = () => {
 		handleGoogleSignIn()
 			.then((result) => {
 				const user = result.user;
+				const signedUser = {
+					name: user?.displayName,
+					email: user?.email,
+					image: user?.photoURL,
+					role: 'student',
+				};
+				fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
+					method: 'POST',
+					headers: {
+						'content-type': 'application/json',
+					},
+					body: JSON.stringify(signedUser),
+				});
 				navigate(from, { replace: true });
 				setLoading(false);
 			})

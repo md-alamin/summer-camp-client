@@ -9,7 +9,7 @@ const PopularInstructors = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios(
-					`${import.meta.env.VITE_SERVER_LINK}/sortInstructors`
+					`${import.meta.env.VITE_SERVER_LINK}/users/sortInstructor`
 				);
 				setInstructors(response.data);
 			} catch (e) {

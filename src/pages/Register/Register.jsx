@@ -37,7 +37,20 @@ const Register = () => {
 				const createdUser = result.user;
 				console.log(createdUser);
 				updateInfo(createdUser, data?.name, data?.photo)
-					.then(() => {})
+					.then(() => {
+						const signedUser = {
+							name: data?.name,
+							email: data?.email,
+							role: 'student',
+						};
+						fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
+							method: 'POST',
+							headers: {
+								'content-type': 'application/json',
+							},
+							body: JSON.stringify(signedUser),
+						});
+					})
 					.catch((error) => console.log(error));
 				logOut()
 					.then()
@@ -66,7 +79,20 @@ const Register = () => {
 		handleGoogleSignIn()
 			.then((result) => {
 				const user = result.user;
-				navigate(from, { replace: true });
+				const signedUser = {
+					name: user?.displayName,
+					email: user?.email,
+					image: user?.photoURL,
+					role: 'student',
+				};
+				fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
+					method: 'POST',
+					headers: {
+						'content-type': 'application/json',
+					},
+					body: JSON.stringify(signedUser),
+				});
+				navigate('/');
 				setLoading(false);
 			})
 			.catch((error) => console.log(error));
