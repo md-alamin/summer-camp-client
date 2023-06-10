@@ -51,7 +51,16 @@ const ClassCard = ({ item }) => {
 							showConfirmButton: false,
 							timer: 1500,
 						});
+					} else if (data.error) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Duplicate class',
+							text: 'The class already exists in your cart',
+						});
 					}
+				})
+				.catch((e) => {
+					console.log('hello');
 				});
 		} else {
 			Swal.fire({
