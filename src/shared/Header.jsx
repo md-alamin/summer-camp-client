@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaCartPlus, FaMoon, FaSun } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProviders';
@@ -7,9 +7,11 @@ import Swal from 'sweetalert2';
 import defaultImg from '../assets/defaultImg.png';
 import logo from '../../public/logo.png';
 import logo2 from '../../public/logo-2.png';
+import useCart from '../hooks/useCart';
 
 const Header = ({ toggleTheme, isDarkMode }) => {
 	const { user, logOut } = useContext(AuthContext);
+	const [cart] = useCart();
 
 	const handleLogOut = () => {
 		logOut().then(Swal.fire('Successfully logged out!'));
@@ -44,7 +46,15 @@ const Header = ({ toggleTheme, isDarkMode }) => {
 			{user ? (
 				<>
 					<li>
-						<NavLink to="/dashboard">Dashboard</NavLink>
+						<NavLink to="/dashboard">
+							Dashboard
+							<div className="indicator">
+								<FaCartPlus size={24}></FaCartPlus>
+								<span className="badge indicator-item bg-transparent border-none pr-1">
+									+{cart?.length || 0}
+								</span>
+							</div>
+						</NavLink>
 					</li>
 					<li onClick={handleLogOut}>
 						<Link>Logout</Link>

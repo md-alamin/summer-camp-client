@@ -2,7 +2,6 @@ import React from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import banner1 from '../../../assets/banner/banner-1.jpg';
-import banner2 from '../../../assets/banner/banner-2.avif';
 import banner3 from '../../../assets/banner/banner-4.webp';
 import './Banner.css';
 
@@ -17,9 +16,6 @@ const Banner = () => {
 			>
 				<div>
 					<img src={banner1} />
-				</div>
-				<div>
-					<img src={banner2} />
 				</div>
 				<div>
 					<img src={banner3} />

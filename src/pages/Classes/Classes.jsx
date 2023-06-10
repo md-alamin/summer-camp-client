@@ -9,7 +9,7 @@ const Classes = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios(
-					`${import.meta.env.VITE_SERVER_LINK}/allClass`
+					`${import.meta.env.VITE_SERVER_LINK}/allClass/all`
 				);
 				setClasses(response.data);
 			} catch (e) {
