@@ -8,10 +8,18 @@ import defaultImg from '../assets/defaultImg.png';
 import logo from '../../public/logo.png';
 import logo2 from '../../public/logo-2.png';
 import useCart from '../hooks/useCart';
+import useStudent from '../hooks/useStudent';
+import useInstructor from '../hooks/useInstructor';
+import useAdmin from '../hooks/useAdmin';
 
 const Header = () => {
 	const { user, logOut } = useContext(AuthContext);
 	const [cart] = useCart();
+	const [isAdmin] = useAdmin();
+	const [isInstructor] = useInstructor();
+	const [isStudent] = useStudent();
+
+	console.log(isAdmin?.admin, isInstructor?.instructor, isStudent?.student);
 
 	const [theme, setTheme] = useState(
 		localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
@@ -64,15 +72,23 @@ const Header = () => {
 			{user ? (
 				<>
 					<li>
-						<NavLink to="/dashboard/my-cart">
-							Dashboard
-							<div className="indicator">
-								<FaCartPlus size={24}></FaCartPlus>
-								<span className="badge indicator-item bg-transparent border-none pr-1">
-									+{cart?.length || 0}
-								</span>
-							</div>
-						</NavLink>
+						{isAdmin?.admin && (
+							<NavLink to="/dashboard/all-users-admin">Dashboard</NavLink>
+						)}
+						{isStudent?.student && (
+							<NavLink to="/dashboard/my-cart">
+								Dashboard
+								<div className="indicator">
+									<FaCartPlus size={24}></FaCartPlus>
+									<span className="badge indicator-item bg-transparent border-none pr-1">
+										+{cart?.length || 0}
+									</span>
+								</div>
+							</NavLink>
+						)}
+						{isInstructor?.instructor && (
+							<NavLink to="/dashboard/my-class-instructor">Dashboard</NavLink>
+						)}
 					</li>
 					<li onClick={handleLogOut}>
 						<Link>Logout</Link>

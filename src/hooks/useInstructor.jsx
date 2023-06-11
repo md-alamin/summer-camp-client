@@ -8,19 +8,17 @@ const useInstructor = () => {
 
 	const { data: isInstructor, isLoading: isInstructorLoading } = useQuery({
 		queryKey: ['isInstructor', user?.email],
+		enabled: !!user?.email && !!localStorage.getItem('access-token'),
 		queryFn: async () => {
-			if (user) {
-				const res = await fetch(
-					`${import.meta.env.VITE_SERVER_LINK}/user/instructor/${user?.email}`,
-					{
-						headers: {
-							authorization: `Bearer ${token}`,
-						},
-					}
-				);
-				return res.json();
-			}
-			return [];
+			const res = await fetch(
+				`${import.meta.env.VITE_SERVER_LINK}/user/instructor/${user?.email}`,
+				{
+					headers: {
+						authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return res.json();
 		},
 	});
 	return [isInstructor, isInstructorLoading];

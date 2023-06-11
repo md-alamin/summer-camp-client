@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 import useAdmin from '../hooks/useAdmin';
 import useInstructor from '../hooks/useInstructor';
+import { Fade } from 'react-awesome-reveal';
 
 const ClassCard = ({ item }) => {
 	const [disabled, setDisabled] = useState(false);
@@ -20,8 +21,6 @@ const ClassCard = ({ item }) => {
 
 	const [isAdmin] = useAdmin();
 	const [isInstructor] = useInstructor();
-
-	console.log(isAdmin?.admin, isInstructor?.instructor);
 
 	useEffect(() => {
 		if (!availableSeats || isAdmin?.admin || isInstructor?.instructor) {
@@ -95,8 +94,11 @@ const ClassCard = ({ item }) => {
 			} shadow-xl`}
 		>
 			<figure className="px-10 pt-10">
-				<img src={image} alt="Shoes" className="rounded-xl" />
+				<Fade>
+					<img src={image} alt="Shoes" className="rounded-xl" />
+				</Fade>
 			</figure>
+
 			<div className="card-body items-center text-center">
 				<h2 className="card-title">{name}</h2>
 			</div>
