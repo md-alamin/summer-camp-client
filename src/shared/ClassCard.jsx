@@ -21,13 +21,15 @@ const ClassCard = ({ item }) => {
 	const [isAdmin] = useAdmin();
 	const [isInstructor] = useInstructor();
 
+	console.log(isAdmin?.admin, isInstructor?.instructor);
+
 	useEffect(() => {
-		if (!availableSeats) {
+		if (!availableSeats || isAdmin?.admin || isInstructor?.instructor) {
 			setDisabled(true);
 		} else {
 			setDisabled(false);
 		}
-	}, [availableSeats, user]);
+	}, [availableSeats, isAdmin?.admin, isInstructor?.instructor]);
 
 	const handleSelect = () => {
 		if (user) {
