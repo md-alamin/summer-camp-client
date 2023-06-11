@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaCartPlus, FaMoon, FaSun } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Link, NavLink } from 'react-router-dom';
@@ -6,11 +6,30 @@ import { AuthContext } from '../providers/AuthProviders';
 import Swal from 'sweetalert2';
 import defaultImg from '../assets/defaultImg.png';
 import logo from '../../public/logo.png';
+import logo2 from '../../public/logo-2.png';
 import useCart from '../hooks/useCart';
 
 const Header = () => {
 	const { user, logOut } = useContext(AuthContext);
 	const [cart] = useCart();
+
+	const [theme, setTheme] = useState(
+		localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
+	);
+
+	const handleToggle = (e) => {
+		if (e.target.checked) {
+			setTheme('dark');
+		} else {
+			setTheme('light');
+		}
+	};
+
+	useEffect(() => {
+		localStorage.setItem('theme', theme);
+		const myTheme = localStorage.getItem('theme');
+		document.querySelector('html').setAttribute('data-theme', myTheme);
+	}, [theme]);
 
 	const handleLogOut = () => {
 		logOut().then(Swal.fire('Successfully logged out!'));
@@ -84,7 +103,11 @@ const Header = () => {
 					</ul>
 				</div>
 				<a>
-					<img className="h-16" src={logo} alt="" />
+					{theme === 'light' ? (
+						<img className="h-16" src={logo} alt="" />
+					) : (
+						<img className="h-16" src={logo2} alt="" />
+					)}
 				</a>
 			</div>
 			<div className="navbar-center hidden lg:flex">
@@ -110,7 +133,11 @@ const Header = () => {
 				)}
 				<label className="swap swap-rotate">
 					{/* this hidden checkbox controls the state */}
-					<input type="checkbox" />
+					<input
+						onChange={handleToggle}
+						checked={theme === 'light' ? false : true}
+						type="checkbox"
+					/>
 
 					{/* sun icon */}
 					<FaSun size={20} className="swap-on"></FaSun>
