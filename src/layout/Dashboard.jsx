@@ -3,13 +3,16 @@ import { useContext } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProviders';
 import Swal from 'sweetalert2';
+import useAdmin from '../hooks/useAdmin';
+import useStudent from '../hooks/useStudent';
+import useInstructor from '../hooks/useInstructor';
 
 const Dashboard = () => {
 	const { logOut } = useContext(AuthContext);
 	const navigate = useNavigate();
-
-	// TODO: fix admin
-	const isAdmin = true;
+	const [isAdmin] = useAdmin();
+	const [isStudent] = useStudent();
+	const [isInstructor] = useInstructor();
 
 	const handleLogOut = () => {
 		logOut().then(Swal.fire('Successfully logged out!'));
@@ -36,7 +39,7 @@ const Dashboard = () => {
 				<ul className="menu p-4 w-80 h-full  bg-blue-600 text-white">
 					{/* <!-- Sidebar content here --> */}
 
-					{isAdmin ? (
+					{isAdmin.admin && (
 						<>
 							<li>
 								<NavLink to="all-class-admin">All Classes</NavLink>
@@ -45,7 +48,8 @@ const Dashboard = () => {
 								<NavLink to="all-users-admin">All Users</NavLink>
 							</li>
 						</>
-					) : (
+					)}
+					{isStudent.student && (
 						<>
 							<li>
 								<NavLink to="my-cart">My Selected Classes</NavLink>

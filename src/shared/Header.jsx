@@ -6,10 +6,9 @@ import { AuthContext } from '../providers/AuthProviders';
 import Swal from 'sweetalert2';
 import defaultImg from '../assets/defaultImg.png';
 import logo from '../../public/logo.png';
-import logo2 from '../../public/logo-2.png';
 import useCart from '../hooks/useCart';
 
-const Header = ({ toggleTheme, isDarkMode }) => {
+const Header = () => {
 	const { user, logOut } = useContext(AuthContext);
 	const [cart] = useCart();
 
@@ -69,9 +68,8 @@ const Header = ({ toggleTheme, isDarkMode }) => {
 	);
 	return (
 		<div
-			className={`navbar ${
-				isDarkMode ? 'bg-black text-white' : 'bg-base-100'
-			} sticky top-0 z-10`}
+			className={`navbar bg-base-100
+			 sticky top-0 z-10`}
 		>
 			<div className="navbar-start">
 				<div className="dropdown">
@@ -86,11 +84,7 @@ const Header = ({ toggleTheme, isDarkMode }) => {
 					</ul>
 				</div>
 				<a>
-					{isDarkMode ? (
-						<img className="h-16" src={logo2} alt="" />
-					) : (
-						<img className="h-16" src={logo} alt="" />
-					)}
+					<img className="h-16" src={logo} alt="" />
 				</a>
 			</div>
 			<div className="navbar-center hidden lg:flex">
@@ -119,10 +113,10 @@ const Header = ({ toggleTheme, isDarkMode }) => {
 					<input type="checkbox" />
 
 					{/* sun icon */}
-					<FaSun size={20} className="swap-on" onClick={toggleTheme}></FaSun>
+					<FaSun size={20} className="swap-on"></FaSun>
 
 					{/* moon icon */}
-					<FaMoon size={20} className="swap-off" onClick={toggleTheme}></FaMoon>
+					<FaMoon size={20} className="swap-off"></FaMoon>
 				</label>
 			</div>
 		</div>

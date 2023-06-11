@@ -10,7 +10,7 @@ const AllUsers = () => {
 		queryFn: async () => {
 			const res = await fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
 				headers: {
-					authorization: `bearer ${token}`,
+					authorization: `Bearer ${token}`,
 				},
 			});
 			return res.json();

@@ -15,10 +15,7 @@ const Main = () => {
 
 	return (
 		<div className={`px-10 ${isDarkMode && homePage ? 'bg-black' : ''}`}>
-			<Header
-				toggleTheme={toggleTheme}
-				isDarkMode={isDarkMode && homePage ? isDarkMode : false}
-			></Header>
+			<Header></Header>
 			<Outlet></Outlet>
 			<Footer isDarkMode={isDarkMode && homePage ? isDarkMode : false}></Footer>
 		</div>
