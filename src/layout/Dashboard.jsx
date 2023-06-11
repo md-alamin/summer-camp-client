@@ -8,6 +8,9 @@ const Dashboard = () => {
 	const { logOut } = useContext(AuthContext);
 	const navigate = useNavigate();
 
+	// TODO: fix admin
+	const isAdmin = true;
+
 	const handleLogOut = () => {
 		logOut().then(Swal.fire('Successfully logged out!'));
 		navigate('/');
@@ -32,15 +35,30 @@ const Dashboard = () => {
 				<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 				<ul className="menu p-4 w-80 h-full  bg-blue-600 text-white">
 					{/* <!-- Sidebar content here --> */}
-					<li>
-						<NavLink to="my-cart">My Selected Classes</NavLink>
-					</li>
-					<li>
-						<a>My Enrolled Classes</a>
-					</li>
-					<li>
-						<a>Payment History</a>
-					</li>
+
+					{isAdmin ? (
+						<>
+							<li>
+								<NavLink to="all-class-admin">All Classes</NavLink>
+							</li>
+							<li>
+								<NavLink to="all-users-admin">All Users</NavLink>
+							</li>
+						</>
+					) : (
+						<>
+							<li>
+								<NavLink to="my-cart">My Selected Classes</NavLink>
+							</li>
+							<li>
+								<a>My Enrolled Classes</a>
+							</li>
+							<li>
+								<a>Payment History</a>
+							</li>
+						</>
+					)}
+
 					<div className="divider h-1 rounded-xl bg-white"></div>
 					<li>
 						<Link to="/">Home</Link>
