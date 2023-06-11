@@ -68,7 +68,7 @@ const Dashboard = () => {
 								<NavLink to="my-class-instructor">My Classes</NavLink>
 							</li>
 							<li>
-								<a>Add Class</a>
+								<NavLink to="add-class">Add Class</NavLink>
 							</li>
 						</>
 					)}
