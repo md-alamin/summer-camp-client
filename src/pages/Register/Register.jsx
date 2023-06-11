@@ -41,7 +41,7 @@ const Register = () => {
 						const signedUser = {
 							name: data?.name,
 							email: data?.email,
-							role: 'student',
+							role: 'Student',
 						};
 						fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
 							method: 'POST',
@@ -83,7 +83,7 @@ const Register = () => {
 					name: user?.displayName,
 					email: user?.email,
 					image: user?.photoURL,
-					role: 'student',
+					role: 'Student',
 				};
 				fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
 					method: 'POST',

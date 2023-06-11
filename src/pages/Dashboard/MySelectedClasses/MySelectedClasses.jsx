@@ -4,7 +4,6 @@ import Table from './Table';
 
 const MySelectedClasses = () => {
 	const [cart] = useCart();
-	console.log(cart);
 	const total = cart.reduce((sum, item) => item.price + sum, 0);
 	return (
 		<div>

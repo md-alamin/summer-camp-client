@@ -9,6 +9,7 @@ import Register from '../pages/Register/Register';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import MySelectedClasses from '../pages/Dashboard/MySelectedClasses/MySelectedClasses';
 import PrivateRoute from './PrivateRoute';
+import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 
 export const router = createBrowserRouter([
 	{
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'my-cart',
 				element: <MySelectedClasses></MySelectedClasses>,
+			},
+			{
+				path: 'all-users-admin',
+				element: <AllUsers></AllUsers>,
 			},
 		],
 	},
