@@ -28,31 +28,31 @@ const HomeSwiper = () => {
 		>
 			<SwiperSlide className="relative">
 				<img className="h-56" src={slide1} alt="" />
-				<h1 className="absolute text-white top-3/4 left-1/3 bg-slate-500 bg-opacity-90">
+				<h1 className="absolute text-white top-3/4 left-1/3 bg-blue-600 bg-opacity-60 rounded-md p-2">
 					Learn Guitar
 				</h1>
 			</SwiperSlide>
 			<SwiperSlide className="relative">
 				<img className="h-56" src={slide2} alt="" />
-				<h1 className="absolute text-white top-3/4 left-1/3 bg-slate-500 bg-opacity-90">
+				<h1 className="absolute text-white top-3/4 left-1/3 bg-blue-600 bg-opacity-60 rounded-md p-2">
 					Learn Violin
 				</h1>
 			</SwiperSlide>
 			<SwiperSlide className="relative">
 				<img className="h-56" src={slide3} alt="" />
-				<h1 className="absolute text-white top-3/4 left-1/3 bg-slate-500 bg-opacity-90">
+				<h1 className="absolute text-white top-3/4 left-1/3 bg-blue-600 bg-opacity-60 rounded-md p-2">
 					Learn Trumpet
 				</h1>
 			</SwiperSlide>
 			<SwiperSlide className="relative">
 				<img className="h-56" src={slide4} alt="" />
-				<h1 className="absolute text-white top-3/4 left-1/3 bg-slate-500 bg-opacity-90">
+				<h1 className="absolute text-white top-3/4 left-1/3 bg-blue-600 bg-opacity-60 rounded-md p-2">
 					Learn Piano
 				</h1>
 			</SwiperSlide>
 			<SwiperSlide className="relative">
 				<img className="h-56" src={slide5} alt="" />
-				<h1 className="absolute text-white top-3/4 left-1/3 bg-slate-500 bg-opacity-90">
+				<h1 className="absolute text-white top-3/4 left-1/3 bg-blue-600 bg-opacity-60 rounded-md p-2">
 					Learn Drums
 				</h1>
 			</SwiperSlide>
