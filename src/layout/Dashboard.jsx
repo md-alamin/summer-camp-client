@@ -39,7 +39,7 @@ const Dashboard = () => {
 				<ul className="menu p-4 w-80 h-full  bg-blue-600 text-white">
 					{/* <!-- Sidebar content here --> */}
 
-					{isAdmin.admin && (
+					{isAdmin?.admin && (
 						<>
 							<li>
 								<NavLink to="all-class-admin">All Classes</NavLink>
@@ -49,7 +49,7 @@ const Dashboard = () => {
 							</li>
 						</>
 					)}
-					{isStudent.student && (
+					{isStudent?.student && (
 						<>
 							<li>
 								<NavLink to="my-cart">My Selected Classes</NavLink>
@@ -59,6 +59,16 @@ const Dashboard = () => {
 							</li>
 							<li>
 								<a>Payment History</a>
+							</li>
+						</>
+					)}
+					{isInstructor?.instructor && (
+						<>
+							<li>
+								<NavLink to="my-class-instructor">My Classes</NavLink>
+							</li>
+							<li>
+								<a>Add Class</a>
 							</li>
 						</>
 					)}

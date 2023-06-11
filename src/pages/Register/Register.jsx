@@ -41,6 +41,7 @@ const Register = () => {
 						const signedUser = {
 							name: data?.name,
 							email: data?.email,
+							image: data?.photo,
 							role: 'Student',
 						};
 						fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {

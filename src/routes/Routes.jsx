@@ -10,6 +10,7 @@ import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import MySelectedClasses from '../pages/Dashboard/MySelectedClasses/MySelectedClasses';
 import PrivateRoute from './PrivateRoute';
 import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
+import MyClassInstructor from '../pages/Dashboard/MyClassInstructor/MyClassInstructor';
 
 export const router = createBrowserRouter([
 	{
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
 				<Dashboard></Dashboard>
 			</PrivateRoute>
 		),
+		errorElement: <ErrorPage></ErrorPage>,
 		children: [
 			{
 				path: 'my-cart',
@@ -54,6 +56,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'all-users-admin',
 				element: <AllUsers></AllUsers>,
+			},
+			{
+				path: 'my-class-instructor',
+				element: <MyClassInstructor></MyClassInstructor>,
 			},
 		],
 	},
