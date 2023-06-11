@@ -6,21 +6,28 @@ import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import useCart from '../hooks/useCart';
+import useAdmin from '../hooks/useAdmin';
+import useInstructor from '../hooks/useInstructor';
 
 const ClassCard = ({ item }) => {
 	const [disabled, setDisabled] = useState(false);
 	const { name, image, price, availableSeats, numberOfStudents, _id } = item;
 	const { user } = useContext(AuthContext);
+	const token = localStorage.getItem('access-token');
+
 	const navigate = useNavigate();
 	const [, refetch] = useCart();
 
+	const [isAdmin] = useAdmin();
+	const [isInstructor] = useInstructor();
+
 	useEffect(() => {
-		if (availableSeats) {
-			setDisabled(false);
-		} else {
+		if (!availableSeats) {
 			setDisabled(true);
+		} else {
+			setDisabled(false);
 		}
-	}, [availableSeats]);
+	}, [availableSeats, user]);
 
 	const handleSelect = () => {
 		if (user) {
@@ -38,6 +45,7 @@ const ClassCard = ({ item }) => {
 				method: 'POST',
 				headers: {
 					'content-type': 'application/json',
+					authorization: `Bearer ${token}`,
 				},
 				body: JSON.stringify(myClass),
 			})

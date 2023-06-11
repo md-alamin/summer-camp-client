@@ -3,24 +3,22 @@ import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
 
 const useCart = () => {
-	const { user } = useContext(AuthContext);
+	const { user, loading } = useContext(AuthContext);
 	const token = localStorage.getItem('access-token');
 
 	const { refetch, data: cart = [] } = useQuery({
 		queryKey: ['cart', user?.email],
+		enabled: !!user?.email && !!localStorage.getItem('access-token'),
 		queryFn: async () => {
-			if (user) {
-				const res = await fetch(
-					`${import.meta.env.VITE_SERVER_LINK}/cart/${user?.email}`,
-					{
-						headers: {
-							authorization: `Bearer ${token}`,
-						},
-					}
-				);
-				return res.json();
-			}
-			return [];
+			const res = await fetch(
+				`${import.meta.env.VITE_SERVER_LINK}/cart/${user?.email}`,
+				{
+					headers: {
+						authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return res.json();
 		},
 	});
 	return [cart, refetch];
