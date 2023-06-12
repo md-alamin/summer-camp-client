@@ -65,10 +65,10 @@ const Dashboard = () => {
 					{isInstructor?.instructor && (
 						<>
 							<li>
-								<NavLink to="my-class-instructor">My Classes</NavLink>
+								<NavLink to="add-class">Add Class</NavLink>
 							</li>
 							<li>
-								<NavLink to="add-class">Add Class</NavLink>
+								<NavLink to="my-class-instructor">My Classes</NavLink>
 							</li>
 						</>
 					)}
@@ -76,6 +76,12 @@ const Dashboard = () => {
 					<div className="divider h-1 rounded-xl bg-white"></div>
 					<li>
 						<Link to="/">Home</Link>
+					</li>
+					<li>
+						<NavLink to="/instructors">Instructors</NavLink>
+					</li>
+					<li>
+						<NavLink to="/classes">Classes</NavLink>
 					</li>
 					<li onClick={handleLogOut}>
 						<Link>Logout</Link>

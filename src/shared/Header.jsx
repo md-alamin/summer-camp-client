@@ -87,7 +87,7 @@ const Header = () => {
 							</NavLink>
 						)}
 						{isInstructor?.instructor && (
-							<NavLink to="/dashboard/my-class-instructor">Dashboard</NavLink>
+							<NavLink to="/dashboard/add-class">Dashboard</NavLink>
 						)}
 					</li>
 					<li onClick={handleLogOut}>

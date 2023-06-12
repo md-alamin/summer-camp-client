@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const AddClass = () => {
+	const token = localStorage.getItem('access-token');
 	const { user } = useContext(AuthContext);
 	const {
 		register,
@@ -16,10 +17,13 @@ const AddClass = () => {
 		data.status = 'pending';
 		data.numberOfStudents = 0;
 		data.price = parseFloat(data.price);
+		data.availableSeats = parseFloat(data.availableSeats);
 		console.log(data);
 
 		axios
-			.post(`${import.meta.env.VITE_SERVER_LINK}/allClass`, data)
+			.post(`${import.meta.env.VITE_SERVER_LINK}/allClass`, data, {
+				headers: { authorization: `Bearer ${token}` },
+			})
 			.then((response) => {
 				if (response.data.insertedId) {
 					Swal.fire({
@@ -34,7 +38,7 @@ const AddClass = () => {
 
 	return (
 		<div>
-			<h1 className="text-center text-5xl font-bold">My Classes</h1>
+			<h1 className="text-center text-5xl font-bold">Add Class</h1>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="flex justify-center py-4"
