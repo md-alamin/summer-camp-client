@@ -10,6 +10,7 @@ const AddClass = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm();
 
@@ -26,6 +27,7 @@ const AddClass = () => {
 			})
 			.then((response) => {
 				if (response.data.insertedId) {
+					reset();
 					Swal.fire({
 						icon: 'success',
 						title: 'Submitted for review',
@@ -81,10 +83,10 @@ const AddClass = () => {
 							<input
 								type="text"
 								placeholder="Enter image URL"
-								{...register('imageUrl', { required: true })}
+								{...register('image', { required: true })}
 								className="form-input p-2 mt-1"
 							/>
-							{errors.imageUrl && (
+							{errors.image && (
 								<span className="text-red-500">This field is required</span>
 							)}
 						</div>

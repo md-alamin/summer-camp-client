@@ -13,6 +13,9 @@ import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 import MyClassInstructor from '../pages/Dashboard/MyClassInstructor/MyClassInstructor';
 import AddClass from '../pages/Dashboard/AddClass/AddClass';
 import AllClass from '../pages/Dashboard/AllClass/AllClass';
+import AdminRoute from './AdminRoute';
+import StudentRoute from './StudentRoute';
+import InstructorRoute from './InstructorRoute';
 
 export const router = createBrowserRouter([
 	{
@@ -53,23 +56,43 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: 'my-cart',
-				element: <MySelectedClasses></MySelectedClasses>,
+				element: (
+					<StudentRoute>
+						<MySelectedClasses></MySelectedClasses>
+					</StudentRoute>
+				),
 			},
 			{
 				path: 'all-users-admin',
-				element: <AllUsers></AllUsers>,
+				element: (
+					<AdminRoute>
+						<AllUsers></AllUsers>
+					</AdminRoute>
+				),
 			},
 			{
 				path: 'my-class-instructor',
-				element: <MyClassInstructor></MyClassInstructor>,
+				element: (
+					<InstructorRoute>
+						<MyClassInstructor></MyClassInstructor>
+					</InstructorRoute>
+				),
 			},
 			{
 				path: 'add-class',
-				element: <AddClass></AddClass>,
+				element: (
+					<InstructorRoute>
+						<AddClass></AddClass>
+					</InstructorRoute>
+				),
 			},
 			{
 				path: 'all-class-admin',
-				element: <AllClass></AllClass>,
+				element: (
+					<AdminRoute>
+						<AllClass></AllClass>
+					</AdminRoute>
+				),
 			},
 		],
 	},

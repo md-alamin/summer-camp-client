@@ -86,7 +86,6 @@ const MyClassTable = ({ item, idx, _id }) => {
 					<td>{feedback ? feedback : 'N/A'}</td>
 					<td className="text-center mx-auto">
 						<button
-							disabled={status !== 'pending'}
 							onClick={() => {
 								openModal(_id);
 							}}

@@ -3,13 +3,19 @@ import React from 'react';
 import Swal from 'sweetalert2';
 
 const UsersTable = ({ idx, user, refetch }) => {
+	const token = localStorage.getItem('access-token');
+
 	const { _id, name, role } = user;
 	const handleAction = (id, myState) => {
 		axios
 			.patch(
 				`${import.meta.env.VITE_SERVER_LINK}/users/${
 					myState ? 'make-admin' : 'make-instructor'
-				}/${id}`
+				}/${id}`,
+				token,
+				{
+					headers: { authorization: `Bearer ${token}` },
+				}
 			)
 			.then((response) => {
 				if (response.data.modifiedCount) {

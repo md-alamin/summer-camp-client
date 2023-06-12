@@ -36,7 +36,11 @@ const Dashboard = () => {
 			</div>
 			<div className="drawer-side">
 				<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-				<ul className="menu p-4 w-44 h-full  bg-blue-600 text-white">
+				<ul
+					className={`menu p-4 ${
+						isAdmin?.admin ? 'w-32' : 'w-60'
+					} h-full  bg-blue-600 text-white`}
+				>
 					{/* <!-- Sidebar content here --> */}
 
 					{isAdmin?.admin && (

@@ -95,7 +95,7 @@ const ClassCard = ({ item }) => {
 		>
 			<figure className="px-10 pt-10">
 				<Fade>
-					<img src={image} alt="Shoes" className="rounded-xl" />
+					<img src={image} alt="Shoes" className="rounded-xl h-52" />
 				</Fade>
 			</figure>
 

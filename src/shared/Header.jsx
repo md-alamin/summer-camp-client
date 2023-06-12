@@ -19,8 +19,6 @@ const Header = () => {
 	const [isInstructor] = useInstructor();
 	const [isStudent] = useStudent();
 
-	console.log(isAdmin?.admin, isInstructor?.instructor, isStudent?.student);
-
 	const [theme, setTheme] = useState(
 		localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
 	);

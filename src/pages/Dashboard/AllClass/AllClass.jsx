@@ -34,7 +34,7 @@ const AllClass = () => {
 								<th>Available Seats</th>
 								<th>Price</th>
 								<th>Status</th>
-								<th>Update</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						{allClass.map((item, idx) => (
@@ -43,6 +43,7 @@ const AllClass = () => {
 								item={item}
 								idx={idx}
 								_id={item._id}
+								refetch={refetch}
 							></AllClassTable>
 						))}
 					</table>
