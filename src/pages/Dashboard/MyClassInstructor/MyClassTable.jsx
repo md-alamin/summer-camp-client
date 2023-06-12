@@ -9,14 +9,8 @@ const MyClassTable = ({ item, idx, _id }) => {
 	const [myClass, setMyClass] = useState([]);
 	const token = localStorage.getItem('access-token');
 
-	const {
-		className,
-		price,
-		availableSeats,
-		numberOfStudents,
-		status,
-		feedback,
-	} = item;
+	const { name, price, availableSeats, numberOfStudents, status, feedback } =
+		item;
 
 	const {
 		register,
@@ -74,10 +68,10 @@ const MyClassTable = ({ item, idx, _id }) => {
 			<tbody>
 				<tr>
 					<th>{idx + 1}</th>
-					<td>{className}</td>
+					<td>{name}</td>
 					<td>{availableSeats}</td>
 					<td>{numberOfStudents}</td>
-					<td>{price}</td>
+					<td>$ {price}</td>
 					{status === 'pending' ? (
 						<td className="btn btn-sm btn-warning cursor-default py-2">
 							Pending
@@ -147,7 +141,7 @@ const MyClassTable = ({ item, idx, _id }) => {
 														</label>
 														<input
 															type="text"
-															defaultValue={myClass?.className}
+															defaultValue={myClass?.name}
 															placeholder="Enter class name"
 															{...register('className', { required: true })}
 															className="form-input w-full p-2 mt-1"
@@ -181,12 +175,12 @@ const MyClassTable = ({ item, idx, _id }) => {
 														</label>
 														<input
 															type="text"
-															defaultValue={myClass?.imageUrl}
+															defaultValue={myClass?.image}
 															placeholder="Enter image URL"
-															{...register('imageUrl', { required: true })}
+															{...register('image', { required: true })}
 															className="form-input w-full p-2 mt-1"
 														/>
-														{errors.imageUrl && (
+														{errors.image && (
 															<span className="text-red-500">
 																This field is required
 															</span>

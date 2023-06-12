@@ -73,7 +73,7 @@ const Header = () => {
 				<>
 					<li>
 						{isAdmin?.admin && (
-							<NavLink to="/dashboard/all-users-admin">Dashboard</NavLink>
+							<NavLink to="/dashboard/all-class-admin">Dashboard</NavLink>
 						)}
 						{isStudent?.student && (
 							<NavLink to="/dashboard/my-cart">

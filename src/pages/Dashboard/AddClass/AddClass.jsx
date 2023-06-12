@@ -52,10 +52,10 @@ const AddClass = () => {
 							<input
 								type="text"
 								placeholder="Enter class name"
-								{...register('className', { required: true })}
+								{...register('name', { required: true })}
 								className="form-input p-2 mt-1"
 							/>
-							{errors.className && (
+							{errors.name && (
 								<span className="text-red-500">This field is required</span>
 							)}
 						</div>

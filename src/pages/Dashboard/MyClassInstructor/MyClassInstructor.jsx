@@ -1,33 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProviders';
-import axios from 'axios';
 import MyClassTable from './MyClassTable';
+import { useQuery } from '@tanstack/react-query';
 
 const MyClassInstructor = () => {
-	const [classes, setClasses] = useState([]);
 	const { user } = useContext(AuthContext);
 
 	const token = localStorage.getItem('access-token');
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios(
-					`${import.meta.env.VITE_SERVER_LINK}/class/${user?.email}`,
-					{
-						headers: {
-							authorization: `Bearer ${token}`,
-						},
-					}
-				);
-				setClasses(response.data);
-			} catch (e) {
-				console.error(e);
-			}
-		};
-
-		fetchData();
-	}, []);
+	const { refetch, data: classes = [] } = useQuery({
+		queryKey: ['my-class'],
+		queryFn: async () => {
+			const res = await fetch(
+				`${import.meta.env.VITE_SERVER_LINK}/class/${user?.email}`,
+				{
+					headers: {
+						authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return res.json();
+		},
+	});
 
 	return (
 		<div>
@@ -59,7 +53,7 @@ const MyClassInstructor = () => {
 				</div>
 			) : (
 				<div className="h-[40vh] flex justify-center items-center text-3xl">
-					No Classes added to Cart
+					No Classes added
 				</div>
 			)}
 		</div>
