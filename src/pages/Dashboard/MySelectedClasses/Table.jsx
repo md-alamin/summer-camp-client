@@ -2,6 +2,7 @@ import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useCart from '../../../hooks/useCart';
+import { Link } from 'react-router-dom';
 
 const Table = ({ item, idx }) => {
 	const { className, price, availableSeats, numberOfStudents, _id } = item;
@@ -46,9 +47,11 @@ const Table = ({ item, idx }) => {
 					</button>
 				</th>
 				<td>
-					<button className="btn bg-red-600 hover:bg-red-600 hover:shadow-lg text-white">
-						Pay
-					</button>
+					<Link to={`/dashboard/payment?price=${price}&id=${_id}`}>
+						<button className="btn bg-red-600 hover:bg-red-600 hover:shadow-lg text-white">
+							Pay
+						</button>
+					</Link>
 				</td>
 			</tr>
 		</tbody>

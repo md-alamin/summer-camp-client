@@ -5,7 +5,7 @@ import { FaEdit } from 'react-icons/fa';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const MyClassTable = ({ item, idx, _id }) => {
+const MyClassTable = ({ item, idx, _id, refetch }) => {
 	const [myClass, setMyClass] = useState([]);
 	const token = localStorage.getItem('access-token');
 
@@ -26,9 +26,11 @@ const MyClassTable = ({ item, idx, _id }) => {
 
 	function openModal(id) {
 		setIsOpen(true);
-		axios(`${import.meta.env.VITE_SERVER_LINK}/my-class/${id}`).then((res) =>
-			setMyClass(res.data)
-		);
+		axios(`${import.meta.env.VITE_SERVER_LINK}/my-class/${id}`, {
+			headers: {
+				authorization: `Bearer ${token}`,
+			},
+		}).then((res) => setMyClass(res.data));
 	}
 
 	const onSubmit = (data) => {
@@ -45,6 +47,7 @@ const MyClassTable = ({ item, idx, _id }) => {
 			.then((res) => {
 				console.log(res.data);
 				closeModal();
+				refetch();
 				if (res.data.modifiedCount > 0) {
 					Swal.fire({
 						icon: 'success',
@@ -109,7 +112,7 @@ const MyClassTable = ({ item, idx, _id }) => {
 						<div className="fixed inset-0 bg-black bg-opacity-25" />
 					</Transition.Child>
 
-					<div className="fixed inset-0 overflow-y-auto">
+					<div className="fixed inset-0 w-2/3 mx-auto overflow-y-auto">
 						<div className="flex min-h-full items-center justify-center p-4 text-center">
 							<Transition.Child
 								as={Fragment}
@@ -133,6 +136,9 @@ const MyClassTable = ({ item, idx, _id }) => {
 											className="flex justify-center py-4"
 										>
 											<div className="w-1/2">
+												<p className="text-center text-red-500">
+													<small>Please enter all fields to submit</small>
+												</p>
 												<div className="grid grid-cols-2 gap-6">
 													<div className="my-4 shadow-md">
 														<label className="text-sm font-medium text-gray-700 block">

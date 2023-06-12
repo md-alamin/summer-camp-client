@@ -16,6 +16,7 @@ import AllClass from '../pages/Dashboard/AllClass/AllClass';
 import AdminRoute from './AdminRoute';
 import StudentRoute from './StudentRoute';
 import InstructorRoute from './InstructorRoute';
+import Payment from '../pages/Dashboard/Payment/Payment';
 
 export const router = createBrowserRouter([
 	{
@@ -59,6 +60,14 @@ export const router = createBrowserRouter([
 				element: (
 					<StudentRoute>
 						<MySelectedClasses></MySelectedClasses>
+					</StudentRoute>
+				),
+			},
+			{
+				path: 'payment',
+				element: (
+					<StudentRoute>
+						<Payment></Payment>
 					</StudentRoute>
 				),
 			},

@@ -6,6 +6,15 @@ import Swal from 'sweetalert2';
 import useAdmin from '../hooks/useAdmin';
 import useStudent from '../hooks/useStudent';
 import useInstructor from '../hooks/useInstructor';
+import { SiGoogleclassroom } from 'react-icons/si';
+import { MdPayment } from 'react-icons/md';
+import {
+	FaBookOpen,
+	FaDoorOpen,
+	FaHome,
+	FaRegAddressBook,
+	FaUser,
+} from 'react-icons/fa';
 
 const Dashboard = () => {
 	const { logOut } = useContext(AuthContext);
@@ -38,7 +47,7 @@ const Dashboard = () => {
 				<label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 				<ul
 					className={`menu p-4 ${
-						isAdmin?.admin ? 'w-32' : 'w-60'
+						isAdmin?.admin ? 'w-36' : 'w-60'
 					} h-full  bg-blue-600 text-white`}
 				>
 					{/* <!-- Sidebar content here --> */}
@@ -56,13 +65,19 @@ const Dashboard = () => {
 					{isStudent?.student && (
 						<>
 							<li>
-								<NavLink to="my-cart">My Selected Classes</NavLink>
+								<NavLink to="my-cart">
+									My Selected Classes<SiGoogleclassroom></SiGoogleclassroom>
+								</NavLink>
 							</li>
 							<li>
-								<a>My Enrolled Classes</a>
+								<a>
+									My Enrolled Classes<FaBookOpen></FaBookOpen>
+								</a>
 							</li>
 							<li>
-								<a>Payment History</a>
+								<a>
+									Payment History<MdPayment></MdPayment>
+								</a>
 							</li>
 						</>
 					)}
@@ -79,16 +94,24 @@ const Dashboard = () => {
 
 					<div className="divider h-1 rounded-xl bg-white"></div>
 					<li>
-						<Link to="/">Home</Link>
+						<Link to="/">
+							Home<FaHome></FaHome>
+						</Link>
 					</li>
 					<li>
-						<NavLink to="/instructors">Instructors</NavLink>
+						<NavLink to="/instructors">
+							Instructors<FaUser></FaUser>
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/classes">Classes</NavLink>
+						<NavLink to="/classes">
+							Classes<FaRegAddressBook></FaRegAddressBook>
+						</NavLink>
 					</li>
 					<li onClick={handleLogOut}>
-						<Link>Logout</Link>
+						<Link>
+							Logout<FaDoorOpen></FaDoorOpen>
+						</Link>
 					</li>
 				</ul>
 			</div>

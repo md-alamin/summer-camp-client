@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active{
+    @apply btn btn-outline border-0 border-b-4 bg-blue-700  border-b-blue-700 hover:bg-white text-white hover:text-black hover:border-b-blue-700 font-bold   active:bg-blue-700
+  }
+  .default{
+    @apply btn btn-outline border-0 border-b-4 border-b-blue-700 hover:bg-blue-700 hover:border-b-blue-700 font-bold   active:bg-blue-700
+  }

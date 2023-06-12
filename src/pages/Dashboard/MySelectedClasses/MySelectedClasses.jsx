@@ -13,9 +13,9 @@ const MySelectedClasses = () => {
 				<h4 className="text-3xl">Total Price: ${total}</h4>
 			</div>
 			{cart.length > 0 ? (
-				<div className="overflow-x-auto">
+				<div className="overflow-x-auto mt-8">
 					<table className="table">
-						<thead>
+						<thead className="text-lg">
 							<tr>
 								<th>#</th>
 								<th>Class Name</th>

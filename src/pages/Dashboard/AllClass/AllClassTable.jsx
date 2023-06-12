@@ -128,7 +128,7 @@ const AllClassTable = ({ item, idx, _id, refetch }) => {
 						Deny
 					</button>
 					<button
-						disabled={!!feedback}
+						disabled={!!feedback || status === 'pending'}
 						onClick={onOpenModal}
 						className="btn btn-xs btn-primary py-1"
 					>

@@ -71,10 +71,18 @@ const Header = () => {
 				<>
 					<li>
 						{isAdmin?.admin && (
-							<NavLink to="/dashboard/all-class-admin">Dashboard</NavLink>
+							<NavLink
+								to="/dashboard/all-class-admin"
+								className={({ isActive }) => (isActive ? 'active' : 'default')}
+							>
+								Dashboard
+							</NavLink>
 						)}
 						{isStudent?.student && (
-							<NavLink to="/dashboard/my-cart">
+							<NavLink
+								className={({ isActive }) => (isActive ? 'active' : 'default')}
+								to="/dashboard/my-cart"
+							>
 								Dashboard
 								<div className="indicator">
 									<FaCartPlus size={24}></FaCartPlus>
@@ -89,12 +97,19 @@ const Header = () => {
 						)}
 					</li>
 					<li onClick={handleLogOut}>
-						<Link>Logout</Link>
+						<Link className="btn btn-outline border-0 border-b-4 border-b-blue-700 hover:bg-blue-700 hover:border-b-blue-700 font-bold   active:bg-blue-700">
+							Logout
+						</Link>
 					</li>
 				</>
 			) : (
 				<li>
-					<NavLink to="/login">Login</NavLink>
+					<NavLink
+						className={({ isActive }) => (isActive ? 'active' : 'default')}
+						to="/login"
+					>
+						Login
+					</NavLink>
 				</li>
 			)}
 		</>
@@ -125,7 +140,7 @@ const Header = () => {
 				</a>
 			</div>
 			<div className="navbar-center hidden lg:flex">
-				<ul className="menu menu-horizontal px-1">{navItems}</ul>
+				<ul className="menu menu-horizontal px-1 gap-2">{navItems}</ul>
 			</div>
 			<div className="navbar-end flex mr-5">
 				{user ? (

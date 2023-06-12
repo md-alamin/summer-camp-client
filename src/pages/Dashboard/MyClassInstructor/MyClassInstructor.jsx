@@ -47,6 +47,7 @@ const MyClassInstructor = () => {
 								item={item}
 								idx={idx}
 								_id={item._id}
+								refetch={refetch}
 							></MyClassTable>
 						))}
 					</table>
